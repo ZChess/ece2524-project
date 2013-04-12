@@ -1,0 +1,5 @@
+title: checkers
+contributors: torsten zac
+type: game
+repo: ece2524.ece.vt.edu:torsten/project.git
+description: checkers against another person, maybe a computer
