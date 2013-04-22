@@ -20,7 +20,7 @@ private:
 	char checkKing();
 	bool valid;//a bool variable to see if the move was valid or not
 public:
-	void movePiece(string prevMove, string newMove);
+	void movePiece(string prevMove, string newMove,int player);
 	bool isValid();
 	char getSpot(int row, int col);
 };
