@@ -56,7 +56,7 @@ bool isValid()
 {
 	return valid;
 }
-void Movement::movePiece(string prevMove, string newMove)
+void Movement::movePiece(string prevMove, string newMove,int player)
 {
 	int prevRow = (int)prevMove[0] - 64;//take the move(A,B,C..etc) and put it into an int A = 1 B = 2, etc
 	int prevCol = (int)prevMove[1] + 1;//to move the numbers in the row 1 = 2
@@ -84,6 +84,18 @@ void Movement::movePiece(string prevMove, string newMove)
 	if(newCol > 10 || newCol < 2)
 	{
 		cout << "Please enter a move that is one the board"<< endl;
+		valid = false;
+		return;
+	}
+	if((board[prevRow][prevCol] == 'x' || board[prevRow][prevCol] == 'X') && player == 2)
+	{
+		cout << "Please select and 'o' peice to move" << endl;
+		valid = false;
+		return;
+	}
+	else if((board[prevRow][prevCol] == 'o' || board[prevRow][prevCol] == 'O') && player == 1)
+	{
+		cout << "Please select and 'x' peice to move" << endl;
 		valid = false;
 		return;
 	}
