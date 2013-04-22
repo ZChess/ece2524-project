@@ -2,6 +2,10 @@
 #include <string>
 #include <sstream>
 
+#include "global.hpp"
+#include "ai.hpp"
+#include "movement.hpp"
+
 using namespace std;
 
 void player1turn();
