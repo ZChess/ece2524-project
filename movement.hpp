@@ -1,7 +1,7 @@
 #ifndef Movement_hpp
 #define Movement_hpp
 
-#include <boost/program_options.hpp>
+//#include <boost/program_options.hpp>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,12 +17,14 @@ class Movement
 {
 private:
 	//char board[10][9];
-	char checkKing();
+	void checkKing();
 	bool valid;//a bool variable to see if the move was valid or not
 public:
+	Movement();
 	void movePiece(string prevMove, string newMove,int player);
 	bool isValid();
-	char getSpot(int row, int col);
+	void setValid(bool value);
+	//char getSpot(int row, int col);
 };
 
 #endif
