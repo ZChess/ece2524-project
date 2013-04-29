@@ -19,11 +19,14 @@ private:
 	//char board[10][9];
 	void checkKing();
 	bool valid;//a bool variable to see if the move was valid or not
+	bool jumped;
 public:
 	Movement();
 	void movePiece(string prevMove, string newMove,int player);
 	bool isValid();
+	bool hasJumped();
 	void setValid(bool value);
+	void setJumped(bool value);
 	//char getSpot(int row, int col);
 };
 
