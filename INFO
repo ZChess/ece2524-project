@@ -1,0 +1,7 @@
+title: Checkers
+contributors: zac torsten
+type: game
+repo: ece2524.ece.vt.edu:zac/project.git ##same as this repo
+description: a command line game of checkers. the peices will be shown on screen after the player has selected there move. an example of a move is 'A2 to B4'. this game will either be a two player game where players take turns or have an AI, or both depending on time restrictions.
+
+

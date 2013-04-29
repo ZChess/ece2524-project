@@ -3,13 +3,14 @@
 #include <sstream>
 #include "movement.hpp"
 #include "global.hpp"
+#include "ai.hpp"
 
 using namespace std;
 
+AI ai;
 Movement mv;
 void player1turn();
 void player2turn();
-//void aiMove();
 //void endGame();
 void printBoard();
 
@@ -37,11 +38,15 @@ int main()
 			case 2:
 				if(players == 2)
 					player2turn();
-				//else
-					//aiMove();
+
+				else
+					aiMove();
 				break;
 			/*case 3:
 				//endGame();
+
+				else
+					ai.ai_move();
 				break;*/
 		}
 	}
