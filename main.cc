@@ -78,7 +78,31 @@ void player1turn()
 		mv.movePiece(from, to,playerTurn);
 		
 	}
-	cout << "goodbye" << endl;
+	printBoard();
+	//if the peiced jumped and there is another move ask if the player wants to jump again
+	while(mv.hasJumped() == true)
+	{
+		cout << "Do you want to end your turn? y/n" << endl;
+		cin >> to;
+		if(to == "n")
+		{
+			cout << "Which piece do you want to move? ";
+			cin >> from;
+			cout << endl << "Where do you want to move it to? ";
+			cin >> to;
+			cout << endl;
+			mv.movePiece(from, to,playerTurn);
+			printBoard();
+		}
+		else if(to == "y")
+		{
+			mv.setJumped(false);
+		}
+		else
+		{
+			cout << "I don't under stand." << endl;
+		}
+	}
 	playerTurn = 2;
 	return;
 }
@@ -106,6 +130,31 @@ void player2turn()
 		cout << endl;
 		mv.movePiece(from, to,playerTurn);
 		
+	}
+	printBoard();
+	//if the peiced jumped and there is another move ask if the player wants to jump again
+	while(mv.hasJumped() == true)
+	{
+		cout << "Do you want to end your turn? y/n" << endl;
+		cin >> to;
+		if(to == "n")
+		{
+			cout << "Which piece do you want to move? ";
+			cin >> from;
+			cout << endl << "Where do you want to move it to? ";
+			cin >> to;
+			cout << endl;
+			mv.movePiece(from, to,playerTurn);
+			printBoard();
+		}
+		else if(to == "y")
+		{
+			mv.setJumped(false);
+		}
+		else
+		{
+			cout << "I don't under stand." << endl;
+		}
 	}
 	playerTurn = 1;
 	return;

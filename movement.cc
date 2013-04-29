@@ -15,6 +15,7 @@ Movement::Movement()
 		 "\n","G","o"," ","o"," ","o"," ","o"," ",
 		 "\n","H"," ","o"," ","o"," ","o"," ","o"};*/
 	valid = true;
+	jumped = false;
 }
 /*
 this function will check to see if the peice has reached the end of the board and became king. It will take place inside of movePiece and should not becalled outside of class. the parameters that it will take are the gameboard itself and what peice was moved
@@ -44,11 +45,18 @@ void Movement::setValid(bool value)
 	valid = value;
 }
 /*
-this is the function to return the specific spot in the array. used to help display board.
-
-char getSpot(int row, int col)
+/*This function sets the value of jumped. 
+*/
+void Movement::setJumped(bool value)
 {
-	return board[row][col];
+	jumped = value;
+}
+/*
+This function returns the status of the jumped. if the move was valid it will return true, otherwise false
+*/
+bool Movement::hasJumped()
+{
+	return jumped;
 }
 /*
 This function returns the status of the move. if the move was valid it will return true, otherwise false
@@ -139,7 +147,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 				valid = false;
 				return;
 			}
-			else if(xdistance == 1 || xdistance == -1)//a standard move to an empty space
+			else if(xdistance == 1 || xdistance == -1 && jumped == false)//a standard move to an empty space
 			{
 				board[newRow][newCol] = "x";
 				board[prevRow][prevCol] = "_";
@@ -152,6 +160,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 					board[newRow][newCol] = "x";
 					board[prevRow][prevCol] = "_";
 					board[prevRow +1][prevCol + 1] = "_";
+					
 				}
 				//else if the move was to the down - left
 				else if(board[prevRow + 1][prevCol -1] == "o" || board[prevRow + 1][prevCol -1] == "O")
@@ -178,7 +187,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 			break;
 		//work out moves with X
 		case X:
-			if(xdistance == 1 || xdistance == -1)
+			if(xdistance == 1 || xdistance == -1 && jumped == false)
 			{
 				board[newRow][newCol] = "X";
 				board[prevRow][prevCol] = "_";
@@ -242,7 +251,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 				valid = false;
 				return;
 			}
-			else if(xdistance == 1 || xdistance == -1)//a standard move to an empty space
+			else if(xdistance == 1 || xdistance == -1 && jumped == false)//a standard move to an empty space
 			{
 				board[newRow][newCol] = "o";
 				board[prevRow][prevCol] = "_";
@@ -280,7 +289,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 			break;
 		//work out moves with O
 		case O:
-			if(xdistance == 1 || xdistance == -1)
+			if(xdistance == 1 || xdistance == -1 && jumped == false)
 			{
 				board[newRow][newCol] = "O";
 				board[prevRow][prevCol] = "_";
@@ -343,6 +352,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 			break;
 	}
 	//check to see if the peice moved was is kinged
+	jumped = true;
 	checkKing();
 	valid = true;
 	return;
