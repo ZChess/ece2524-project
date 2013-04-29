@@ -1,15 +1,32 @@
-objects := main.o main.cc
-libs = -lboost_program_options
+all: checkers
 
-all : main
+checkers: main.o global.o movement.o ai.o
+	g++ -o checkers main.o global.o movement.o ai.o
 
-main : $(objects)
-	g++ -o $@ $^ $(libs)
+ai.o: ai.cc ai.hpp
+	g++ -c ai.cc
 
-%.o %.cc
-	g++ -c -MMD -o $@ $<
+global.o: global.cc global.hpp
+	g++ -c global.cc
 
--include $(objects:.o=.d)
+movement.o: movement.cc global.hpp movement.hpp
+	g++ -c movement.cc
 
-clean :
-	rm -f *.o *.cc
+main.o: main.cc global.hpp movement.hpp
+	g++ -c main.cc
+
+clean:
+	rm -f *.o
+
+#all: global movement main
+
+#global: global.o
+
+#movement: movement.o
+
+#ai: ai.o
+
+#main: main.o
+
+#clean:
+#	-rm -f *.o

@@ -1,16 +1,16 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
+#include "movement.hpp"
 #include "global.hpp"
 #include "ai.hpp"
-#include "movement.hpp"
 
 using namespace std;
 
+AI ai;
+Movement mv;
 void player1turn();
 void player2turn();
-//void aiMove();
 //void endGame();
 void printBoard();
 
@@ -27,6 +27,7 @@ int main()
 		cout << "Invalid number of players" << endl;
 		cin >> players;
 	}
+	//players = players--;
 	while(1)
 	{
 		switch(playerTurn)
@@ -37,11 +38,11 @@ int main()
 			case 2:
 				if(players == 2)
 					player2turn();
-				//else
-					//aiMove();
+				else
+					ai.ai_move();
 				break;
 			/*case 3:
-				//endGame();
+				endGame();
 				break;*/
 		}
 	}
@@ -59,8 +60,21 @@ void player1turn()
 	cout << endl << "Where do you want to move it to? ";
 	cin >> to;
 	cout << endl;
+	mv.setValid(true);
+	mv.movePiece(from, to,playerTurn);
 
-	//movePiece(from, to);
+	//if the move was invalid ask to recieve new input
+	while(mv.isValid() == false)
+	{
+		cout << "Which piece do you want to move? ";
+		cin >> from;
+		cout << endl << "Where do you want to move it to? ";
+		cin >> to;
+		cout << endl;
+		mv.movePiece(from, to,playerTurn);
+		
+	}
+	cout << "goodbye" << endl;
 	playerTurn = 2;
 	return;
 }
@@ -75,8 +89,20 @@ void player2turn()
 	cout << endl << "Where do you want to move it to?";
 	cin >> to;
 	cout << endl;
+	mv.setValid(true);
+	mv.movePiece(from, to,playerTurn);
 
-	//movePiece(from, to);
+	//if the move was invalid ask to recieve new input
+	while(mv.isValid() == false)
+	{
+		cout << "Which piece do you want to move? ";
+		cin >> from;
+		cout << endl << "Where do you want to move it to? ";
+		cin >> to;
+		cout << endl;
+		mv.movePiece(from, to,playerTurn);
+		
+	}
 	playerTurn = 1;
 	return;
 }
