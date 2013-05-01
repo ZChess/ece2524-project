@@ -40,7 +40,11 @@ int main()
 					player2turn();
 
 				else
-					aiMove();
+				{
+					cout << "test1" << endl;
+					ai.ai_move();
+					playerTurn = 1;
+				}
 				break;
 			/*case 3:
 				//endGame();
