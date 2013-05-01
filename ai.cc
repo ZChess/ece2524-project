@@ -1,23 +1,30 @@
 #include "ai.hpp"
-<<<<<<< HEAD
 #include "global.hpp"
-
-void ai::ai_move()
-=======
 
 AI::AI()
 {}
 
 void AI::ai_move()
 {
+	cout << "test2" << endl;
 	int done = 0;
 	done = check_king();
+	cout << "test3" << endl;
 	if(done == 0)
+	{
 		done = check_attack();
+		cout << "test4" << endl;
+	}
 	if(done == 0)
+	{
 		done = check_defend();
+		cout << "test5" << endl;
+	}
 	if(done == 0)
+	{
 		random_move();
+		cout << "test6" << endl;
+	}
 	return;
 }
 
@@ -139,7 +146,7 @@ int AI::check_defend()
 {
 	int done = 0;
 	int i = 1;
-	int j;
+	int j = 2;
 	while(i<9 && done==0)
 	{
 		j = 2;
@@ -147,40 +154,44 @@ int AI::check_defend()
 		{
 			if(board[i][j] == "O")
 			{
-				if(board[i-1][j-1] == "x" or board[i-1][j-1] == "X")
+				if(board[i-1][j-1] == "x" || board[i-1][j-1] == "X")
 				{
 					if(board[i+1][j+1] == "_")
 					{
 						board[i+1][j+1] = "O";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
-				else if(board[i-1][j+1] == "x" or board[i-1][j+1] == "X")
+				else if(board[i-1][j+1] == "x" || board[i-1][j+1] == "X")
 				{
 					if(board[i+1][j-1] == "_")
 					{
 						board[i+1][j-1] = "O";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
-				else if(board[i+1][j+1] == "X")
+				else if(i != 8 && j != 8  && board[i+1][j+1] == "X")
 				{
 					if(board[i-1][j-1] == "_")
 					{
 						board[i-1][j-1] = "O";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
-				else if(board[i+1][j-1] == "X")
+				else if(i != 8 && board[i+1][j-1] == "X")
 				{
-					if(board[i-1][j+1] == "_")
+					if(board[i-1][j+1] == "_" && j !=8)
 					{
 						board[i-1][j+1] = "O";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
 			}
@@ -195,6 +206,7 @@ int AI::check_defend()
 							board[i-1][j+1] = "o";
 							board[i][j] = "_";
 							done = 1;
+							return done;
 						}
 					}
 				}
@@ -207,25 +219,29 @@ int AI::check_defend()
 							board[i-1][j+1] = "o";
 							board[i][j] = "_";
 							done = 1;
+							return done;
 						}
 					}
 				}
-				else if(board[i+1][j-1] == "X")
+
+				else if(board[i+1][j+1] == "X" && i != 8 && j != 8)
 				{
-					if(board[i-1][j+1] == "_")
+					if(board[i-1][j-1] == "_")
 					{
-						board[i-1][j+1] = "o";
+						board[i-1][j-1] = "o";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
-				else if(board[i+1][j+1] == "X")
+				else if(board[i+1][j-1] == "X" && i != 8)
 				{
-					if(board[i-1][j+1] == "_")
+					if(board[i-1][j+1] == "_" && j !=8)
 					{
 						board[i-1][j+1] = "o";
 						board[i][j] = "_";
 						done = 1;
+						return done;
 					}
 				}
 			}
