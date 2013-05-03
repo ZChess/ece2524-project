@@ -51,7 +51,6 @@ int main()
 					player2turn();
 				else
 				{
-					cout << "test1" << endl;
 					ai.ai_move();
 				}
 				if(checkEnd()==1)

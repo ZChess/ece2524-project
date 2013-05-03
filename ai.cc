@@ -6,24 +6,19 @@ AI::AI()
 
 void AI::ai_move()
 {
-	cout << "test2" << endl;
 	int done = 0;
 	done = check_king();
-	cout << "test3" << endl;
 	if(done == 0)
 	{
 		done = check_attack();
-		cout << "test4" << endl;
 	}
 	if(done == 0)
 	{
 		done = check_defend();
-		cout << "test5" << endl;
 	}
 	if(done == 0)
 	{
 		random_move();
-		cout << "test6" << endl;
 	}
 	return;
 }
