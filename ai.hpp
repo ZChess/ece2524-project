@@ -1,11 +1,11 @@
-#ifndef AI_H
-#define AI_H
+#ifndef AI_hpp
+#define AI_hpp
 
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string>
 #include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
 #include "global.hpp"
 
 using namespace std;

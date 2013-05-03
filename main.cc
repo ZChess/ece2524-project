@@ -11,39 +11,52 @@ AI ai;
 Movement mv;
 void player1turn();
 void player2turn();
-//void endGame();
+void checkEnd();
+int endGame(int players);
 void printBoard();
-
-int playerTurn = 1;
+int playerTurn = 0;
 
 int main()
 {
 	int players;
-
-	cout << "How may players?" << endl;
-	cin >> players;
-	while(players != 1 && players != 2)
-	{
-		cout << "Invalid number of players" << endl;
-		cin >> players;
-	}
-	//players = players--;
-	while(1)
+	int finished = 0;
+	while(finished == 0)
 	{
 		switch(playerTurn)
 		{
+			case 0:
+				cout << "How may players?" << endl;
+				cin >> players;
+				while(players != 1 && players != 2)
+				{
+					cout << "Invalid number of players" << endl;
+					cin >> players;
+				}
+				playerTurn = 1;
 			case 1:
 				player1turn();
 				break;
+				if(checkEnd()==1)
+					playerTurn = 3;
+				else
+					playerTurn = 2;
+
 			case 2:
 				if(players == 2)
 					player2turn();
 				else
+				{
+					cout << "test1" << endl;
 					ai.ai_move();
+				}
 				break;
-			/*case 3:
-				endGame();
-				break;*/
+				if(checkEnd()==1)
+					playerTurn = 3;
+				else
+					playerTurn = 1;
+			case 3:
+				finished = endGame(players);
+				break;
 		}
 	}
 	return 0;
@@ -74,7 +87,31 @@ void player1turn()
 		mv.movePiece(from, to,playerTurn);
 		
 	}
-	cout << "goodbye" << endl;
+	printBoard();
+	//if the peiced jumped and there is another move ask if the player wants to jump again
+	while(mv.hasJumped() == true)
+	{
+		cout << "Do you want to end your turn? y/n" << endl;
+		cin >> to;
+		if(to == "n")
+		{
+			cout << "Which piece do you want to move? ";
+			cin >> from;
+			cout << endl << "Where do you want to move it to? ";
+			cin >> to;
+			cout << endl;
+			mv.movePiece(from, to,playerTurn);
+			printBoard();
+		}
+		else if(to == "y")
+		{
+			mv.setJumped(false);
+		}
+		else
+		{
+			cout << "I don't under stand." << endl;
+		}
+	}
 	playerTurn = 2;
 	return;
 }
@@ -103,7 +140,31 @@ void player2turn()
 		mv.movePiece(from, to,playerTurn);
 		
 	}
-	playerTurn = 1;
+	printBoard();
+	//if the peiced jumped and there is another move ask if the player wants to jump again
+	while(mv.hasJumped() == true)
+	{
+		cout << "Do you want to end your turn? y/n" << endl;
+		cin >> to;
+		if(to == "n")
+		{
+			cout << "Which piece do you want to move? ";
+			cin >> from;
+			cout << endl << "Where do you want to move it to? ";
+			cin >> to;
+			cout << endl;
+			mv.movePiece(from, to,playerTurn);
+			printBoard();
+		}
+		else if(to == "y")
+		{
+			mv.setJumped(false);
+		}
+		else
+		{
+			cout << "I don't under stand." << endl;
+		}
+	}
 	return;
 }
 
@@ -116,4 +177,65 @@ void printBoard()
 	}
 	cout << endl;
 	return;
+}
+
+void checkEnd()
+{
+	int end = 0;
+	int i = 1;
+	int j;
+	while(end == 0&&i<9)
+	{
+		j = 2;
+		while(end==0&&j<10)
+		{
+			if(board[i][j] == "x" or board[i][j] == "X")
+				end = 1;
+			j++;
+		}
+		i++;
+	}
+	i = 1;
+	while(end == 0&&i<9)
+	{
+		j = 2;
+		while(end==0&&j<10)
+		{
+			if(board[i][j] == "x" or board[i][j] == "X")
+				end = 1;
+			j++;
+		}
+		i++;
+	}
+	return end;
+}
+
+int endGame(int players)
+{
+	int finished = 0;
+	string playAgain = "a";
+	if(playerTurn==1)
+		cout << "Player 1 wins!" << endl;
+	else if(players==1)
+		cout << "The computer wins!" << endl;
+	else
+		cout << "Player 2 wins!" << endl;
+	cout << "Would you like to play again? y/n" << endl;
+	cin >> playAgain;
+	while(playAgain!="y" or playAgain!="n")
+	{
+		cout << "Would you like to play again? y/n" << endl;
+		cin >> playAgain;
+	}
+	if(playAgiain == "y")
+	{
+		playerTurn = 0;
+		coutn << "Good luck" << endl;
+	}
+	else
+	{
+		cout << "Thanks for playing" << endl;
+		finished = 1;
+	}
+	return finished;
 }
