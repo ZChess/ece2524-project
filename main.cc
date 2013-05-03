@@ -12,16 +12,16 @@ Movement mv;
 void player1turn();
 void player2turn();
 int checkEnd();
-int endGame(int players);
+int endGame(int players, int turn);
 void printBoard();
 int playerTurn = 0;
-int hasWon= 0;
 void resetBoard();
 
 int main()
 {
 	int players;
 	int finished = 0;
+	int turn = 0;
 	while(finished == 0)
 	{
 		switch(playerTurn)
@@ -39,8 +39,8 @@ int main()
 				player1turn();
 				if(checkEnd()==1)
 				{
-					hasWon = playerTurn;
 					playerTurn = 3;
+					turn = 1;
 				}
 				else
 					playerTurn = 2;
@@ -56,14 +56,15 @@ int main()
 				}
 				if(checkEnd()==1)
 				{
-					hasWon = playerTurn;
+					printBoard();
 					playerTurn = 3;
+					turn = 2;
 				}
 				else
 					playerTurn = 1;
 				break;
 			case 3:
-				finished = endGame(players);
+				finished = endGame(players, turn);
 				break;
 		}
 	}
@@ -192,13 +193,15 @@ int checkEnd()
 	int end = 0;
 	int i = 1;
 	int j;
+	int x = 0;
+	int o = 0;
 	while(end == 0&&i<9)
 	{
 		j = 2;
 		while(end==0&&j<10)
 		{
 			if(board[i][j] == "x" or board[i][j] == "X")
-				end = 1;
+				x++;
 			j++;
 		}
 		i++;
@@ -210,19 +213,21 @@ int checkEnd()
 		while(end==0&&j<10)
 		{
 			if(board[i][j] == "x" or board[i][j] == "X")
-				end = 1;
+				o++;
 			j++;
 		}
 		i++;
 	}
+	if(x == 0 or o == 0)
+		end = 1;
 	return end;
 }
 
-int endGame(int players)
+int endGame(int players,int turn)
 {
 	int finished = 0;
 	string playAgain = "a";
-	if(hasWon==1)
+	if(turn==1)
 		cout << "Player 1 wins!" << endl;
 	else if(players==1)
 		cout << "The computer wins!" << endl;
@@ -230,7 +235,7 @@ int endGame(int players)
 		cout << "Player 2 wins!" << endl;
 	cout << "Would you like to play again? y/n" << endl;
 	cin >> playAgain;
-	while(playAgain!="y" or playAgain!="n")
+	while(playAgain!="y" && playAgain!="n")
 	{
 		cout << "Would you like to play again? y/n" << endl;
 		cin >> playAgain;
