@@ -237,6 +237,7 @@ int endGame(int players,int turn)
 	cin >> playAgain;
 	while(playAgain!="y" && playAgain!="n")
 	{
+		cout << "I don't underStand" << endl;
 		cout << "Would you like to play again? y/n" << endl;
 		cin >> playAgain;
 	}
@@ -244,6 +245,7 @@ int endGame(int players,int turn)
 	{
 		playerTurn = 0;
 		cout << "Good luck" << endl;
+		resetBoard();
 	}
 	else
 	{
