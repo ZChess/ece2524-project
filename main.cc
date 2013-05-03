@@ -11,8 +11,8 @@ AI ai;
 Movement mv;
 void player1turn();
 void player2turn();
-void checkEnd();
-int endGame(int players);
+int checkEnd();
+int endGame(int players, int turn);
 void printBoard();
 int playerTurn = 0;
 
@@ -20,6 +20,7 @@ int main()
 {
 	int players;
 	int finished = 0;
+	int turn = 0;
 	while(finished == 0)
 	{
 		switch(playerTurn)
@@ -35,11 +36,14 @@ int main()
 				playerTurn = 1;
 			case 1:
 				player1turn();
-				break;
 				if(checkEnd()==1)
+				{
 					playerTurn = 3;
+					turn = 1;
+				}
 				else
 					playerTurn = 2;
+				break;
 
 			case 2:
 				if(players == 2)
@@ -49,13 +53,17 @@ int main()
 					cout << "test1" << endl;
 					ai.ai_move();
 				}
-				break;
 				if(checkEnd()==1)
+				{
+					printBoard();
 					playerTurn = 3;
+					turn = 2;
+				}
 				else
 					playerTurn = 1;
+				break;
 			case 3:
-				finished = endGame(players);
+				finished = endGame(players, turn);
 				break;
 		}
 	}
@@ -112,7 +120,6 @@ void player1turn()
 			cout << "I don't under stand." << endl;
 		}
 	}
-	playerTurn = 2;
 	return;
 }
 
@@ -179,18 +186,20 @@ void printBoard()
 	return;
 }
 
-void checkEnd()
+int checkEnd()
 {
 	int end = 0;
 	int i = 1;
 	int j;
+	int x = 0;
+	int o = 0;
 	while(end == 0&&i<9)
 	{
 		j = 2;
 		while(end==0&&j<10)
 		{
 			if(board[i][j] == "x" or board[i][j] == "X")
-				end = 1;
+				x++;
 			j++;
 		}
 		i++;
@@ -202,19 +211,21 @@ void checkEnd()
 		while(end==0&&j<10)
 		{
 			if(board[i][j] == "x" or board[i][j] == "X")
-				end = 1;
+				o++;
 			j++;
 		}
 		i++;
 	}
+	if(x == 0 or o == 0)
+		end = 1;
 	return end;
 }
 
-int endGame(int players)
+int endGame(int players,int turn)
 {
 	int finished = 0;
 	string playAgain = "a";
-	if(playerTurn==1)
+	if(turn==1)
 		cout << "Player 1 wins!" << endl;
 	else if(players==1)
 		cout << "The computer wins!" << endl;
@@ -222,15 +233,15 @@ int endGame(int players)
 		cout << "Player 2 wins!" << endl;
 	cout << "Would you like to play again? y/n" << endl;
 	cin >> playAgain;
-	while(playAgain!="y" or playAgain!="n")
+	while(playAgain!="y" && playAgain!="n")
 	{
 		cout << "Would you like to play again? y/n" << endl;
 		cin >> playAgain;
 	}
-	if(playAgiain == "y")
+	if(playAgain == "y")
 	{
 		playerTurn = 0;
-		coutn << "Good luck" << endl;
+		cout << "Good luck" << endl;
 	}
 	else
 	{
