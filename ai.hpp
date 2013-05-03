@@ -17,6 +17,7 @@ private:
 	int check_attack();
 	int check_defend();
 	void random_move();
+	int doubleJump(int i, int j);
 public:
 	AI();
 	void ai_move();
