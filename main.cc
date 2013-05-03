@@ -211,7 +211,7 @@ int checkEnd()
 		j = 2;
 		while(end==0&&j<10)
 		{
-			if(board[i][j] == "x" or board[i][j] == "X")
+			if(board[i][j] == "o" or board[i][j] == "O")
 				o++;
 			j++;
 		}
