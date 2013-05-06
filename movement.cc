@@ -75,37 +75,37 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 	//this is a check to see if the input is invalid(may have to change 
 	if(prevRow > 9 || prevRow < 1)
 	{
-		cout << "Please select a peice that is one the board"<< endl;
+		cout << "Please select a peice that is on the board"<< endl;
 		valid = false;
 		return;
 	}
 	if(prevCol > 10 || prevCol < 2)
 	{
-		cout << "Please select a peice that is one the board"<< endl;
+		cout << "Please select a peice that is on the board"<< endl;
 		valid = false;
 		return;
 	}
 	if(newRow > 9 || newRow < 1)
 	{
-		cout << "Please enter a move that is one the board"<< endl;
+		cout << "Please enter a move that is on the board"<< endl;
 		valid = false;
 		return;
 	}
 	if(newCol > 10 || newCol < 2)
 	{
-		cout << "Please enter a move that is one the board"<< endl;
+		cout << "Please enter a move that is on the board"<< endl;
 		valid = false;
 		return;
 	}
 	if((board[prevRow][prevCol] == "x" || board[prevRow][prevCol] == "X") && player == 2)
 	{
-		cout << "Please select and o peice to move" << endl;
+		cout << "Please select an o piece to move" << endl;
 		valid = false;
 		return;
 	}
 	else if((board[prevRow][prevCol] == "o" || board[prevRow][prevCol] == "O") && player == 1)
 	{
-		cout << "Please select and x peice to move" << endl;
+		cout << "Please select an x piece to move" << endl;
 		valid = false;
 		return;
 	}
@@ -147,7 +147,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 				valid = false;
 				return;
 			}
-			else if(xdistance == 1 || xdistance == -1 && jumped == false)//a standard move to an empty space
+			else if(jumped == false && (xdistance == 1 || xdistance == -1))//a standard move to an empty space
 			{
 				board[newRow][newCol] = "x";
 				board[prevRow][prevCol] = "_";
@@ -187,7 +187,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 			break;
 		//work out moves with X
 		case X:
-			if(xdistance == 1 || xdistance == -1 && jumped == false)
+			if(jumped == false && (xdistance == 1 || xdistance == -1))
 			{
 				board[newRow][newCol] = "X";
 				board[prevRow][prevCol] = "_";
@@ -251,7 +251,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 				valid = false;
 				return;
 			}
-			else if(xdistance == 1 || xdistance == -1 && jumped == false)//a standard move to an empty space
+			else if(jumped == false && (xdistance == 1 || xdistance == -1))//a standard move to an empty space
 			{
 				board[newRow][newCol] = "o";
 				board[prevRow][prevCol] = "_";
@@ -289,7 +289,7 @@ void Movement::movePiece(string prevMove, string newMove,int player)
 			break;
 		//work out moves with O
 		case O:
-			if(xdistance == 1 || xdistance == -1 && jumped == false)
+			if(jumped == false && (xdistance == 1 || xdistance == -1))
 			{
 				board[newRow][newCol] = "O";
 				board[prevRow][prevCol] = "_";

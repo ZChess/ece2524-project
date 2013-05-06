@@ -82,6 +82,7 @@ void player1turn()
 	cin >> to;
 	cout << endl;
 	mv.setValid(true);
+	mv.setJumped(false);
 	mv.movePiece(from, to,playerTurn);
 
 	//if the move was invalid ask to recieve new input
@@ -93,6 +94,7 @@ void player1turn()
 		cin >> to;
 		cout << endl;
 		mv.movePiece(from, to,playerTurn);
+		mv.setJumped(true);
 		
 	}
 	printBoard();
@@ -117,7 +119,7 @@ void player1turn()
 		}
 		else
 		{
-			cout << "I don't under stand." << endl;
+			cout << "I don't understand." << endl;
 		}
 	}
 	return;
@@ -145,6 +147,7 @@ void player2turn()
 		cin >> to;
 		cout << endl;
 		mv.movePiece(from, to,playerTurn);
+		mv.setJumped(true);
 		
 	}
 	printBoard();
@@ -169,7 +172,7 @@ void player2turn()
 		}
 		else
 		{
-			cout << "I don't under stand." << endl;
+			cout << "I don't understand." << endl;
 		}
 	}
 
